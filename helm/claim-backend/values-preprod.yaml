@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: cloud-taifacare.dha.go.ke/taifa/claimprocessingengine
+  tag: preprod-2026-02-05-09-21
+  pullPolicy: Always
+
+env:
+  SPRING_PROFILES_ACTIVE: uhc-preprod
+  JAVA_OPTS: ' -Dlogging.level.io.camunda.zeebe.client.impl.ZeebeCallCredentials=ERROR -javaagent:/app/apm-agent.jar -Delastic.apm.service_name=EclaimsPREPROD -Delastic.apm.environment=PREPROD -Delastic.apm.server_url=https://prod-apm-server.apeiro-digital.com -Delastic.apm.secret_token=AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS1raWJhbmE6UGdYTFJ5c2tSSjZSYk4zeTR5LTZXdw -Delastic.apm.application_packages=io.coredge.health.claims -Dredis.host=10.106.236.176 -Dredis.port=6379 -Dcamunda.client.zeebe.gateway-url=http://10.10.100.125:26500 -Dai.notes.base-url=http://74.235.194.111:4050 -D'
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  enabled: false
+  name: ""
+  volumeName: ""
+  mountPath: ""
+

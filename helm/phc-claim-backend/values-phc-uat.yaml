@@ -1,0 +1,35 @@
+
+replicaCount: 3
+
+image:
+  repository: cloud-taifacare.dha.go.ke/taifa/claimprocessingengine
+  tag: uat-2026-07-07-14-45
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+env:
+  SPRING_PROFILES_ACTIVE: uhc-phc-uat
+  JAVA_OPTS: >-
+    -Dlogging.level.io.camunda.zeebe.client.impl.ZeebeCallCredentials=ERROR
+    -Dspring.cloud.kubernetes.leader.config-map-name=my-config-map
+    -Dredis.host=10.111.221.241
+    -Dredis.port=6379
+    -Dcamunda.client.zeebe.base-url=http://10.107.37.253:26500/rest/
+    -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=https://qa-auth.apeiro-digital.com/auth/realms/camunda-platform
+    -Dcamunda.client.zeebe.gateway-url=http://10.107.37.253:26500
+
+  
+dbSecret:
+  enabled: false
+  name: payer-prod-db-creds
+  key: DB_PASSWORD
+
+config:
+  enabled: false
+  name: ""
+  volumeName: ""
+  mountPath: ""

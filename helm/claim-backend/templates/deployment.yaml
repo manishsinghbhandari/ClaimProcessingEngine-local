@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claimprocessingengine-deployment
+  labels:
+    app: claimprocessingengine
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  selector:
+    matchLabels:
+      app: claimprocessingengine
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: claimprocessingengine
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      {{- if .Values.config.enabled }}
+      volumes:
+        - name: {{ .Values.config.volumeName }}
+          configMap:
+            name: {{ .Values.config.name }}
+      {{- end }}
+      containers:
+        - name: claimprocessingengine
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: HIE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: hie-credentials
+                  key: HIE_PASS
+            - name: HIE_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hie-credentials
+                  key: HIE_USER_NAME
+            - name: JAVA_OPTS
+              value: {{ .Values.env.JAVA_OPTS | quote }}
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.env.SPRING_PROFILES_ACTIVE | quote }}
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          {{- if .Values.config.enabled }}
+          volumeMounts:
+            - name: {{ .Values.config.volumeName }}
+              mountPath: {{ .Values.config.mountPath }}
+              readOnly: true
+          {{- end }}
+

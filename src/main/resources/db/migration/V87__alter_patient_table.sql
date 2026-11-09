@@ -1,0 +1,2 @@
+ALTER TABLE patient ADD COLUMN IF NOT EXISTS policy_start_date TIMESTAMP;
+ALTER TABLE patient ADD COLUMN IF NOT EXISTS policy_end_date TIMESTAMP;

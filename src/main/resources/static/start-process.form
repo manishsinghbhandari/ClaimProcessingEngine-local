@@ -1,0 +1,136 @@
+{
+  "components": [
+    {
+      "text": "### Start a new Claim Payment Process",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1as2tgk",
+        "columns": null
+      },
+      "id": "Field_1piit3t"
+    },
+    {
+      "label": "Vendor Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ulcxg0",
+        "columns": null
+      },
+      "id": "Field_1ylk3ar",
+      "key": "vendorName",
+      "description": "Vendor Name",
+      "defaultValue": "Aperio"
+    },
+    {
+      "label": "Vendor Code",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_06eioc4",
+        "columns": null
+      },
+      "id": "Field_1ilb1cw",
+      "key": "vendorCode",
+      "description": "Vendor Code"
+    },
+    {
+      "label": "Claim Number",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ibyi30",
+        "columns": null
+      },
+      "id": "Field_0vcukot",
+      "key": "claimNumber",
+      "description": "Claim Number",
+      "defaultValue": "AP-1386296219169587000"
+    },
+    {
+      "label": "Claim Amount",
+      "type": "number",
+      "layout": {
+        "row": "Row_0bpgbhx",
+        "columns": null
+      },
+      "id": "Field_0b8uf9s",
+      "key": "claimAmount",
+      "description": "Claim Amount",
+      "validate": {
+        "required": true
+      },
+      "defaultValue": 0,
+      "decimalDigits": 1
+    },
+    {
+      "label": "Separator",
+      "type": "separator",
+      "layout": {
+        "row": "Row_0tdvqtj",
+        "columns": null
+      },
+      "id": "Field_0rymv4j"
+    },
+    {
+      "label": "Beneficiary Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_05955ay",
+        "columns": null
+      },
+      "id": "Field_1tokbdj",
+      "key": "beneficiaryName",
+      "description": "Beneficiary Name"
+    },
+    {
+      "label": "Beneficiary SHA Number",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1vzcs0n",
+        "columns": null
+      },
+      "id": "Field_173ku50",
+      "key": "beneficiaryShaNo",
+      "description": "Beneficiary SHA Number"
+    },
+    {
+      "label": "Separator",
+      "type": "separator",
+      "layout": {
+        "row": "Row_0x5sxvz",
+        "columns": null
+      },
+      "id": "Field_072rama"
+    },
+    {
+      "label": "Invoice Number",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1nm9y9v",
+        "columns": null
+      },
+      "id": "Field_04lbukk",
+      "key": "invoiceNumber",
+      "description": "Invoice Number",
+      "defaultValue": "10000"
+    },
+    {
+      "action": "submit",
+      "label": "Submit Claim",
+      "type": "button",
+      "layout": {
+        "row": "Row_0aq6f9y",
+        "columns": null
+      },
+      "id": "Field_1s5e8kx"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1km08al",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.27.0"
+  },
+  "schemaVersion": 16
+}

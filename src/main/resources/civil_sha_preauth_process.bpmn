@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_192tvnm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.41.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="civilPreAuthProcess" name="Civil PreAuth Approval processv1" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_start_to_preauth" sourceRef="StartEvent_1" targetRef="PreAuthorizationInit" />
+    <bpmn:sequenceFlow id="Flow_0s0a7de" sourceRef="PreAuthorizationInit" targetRef="Activity_preauth_postSaveValidation" />
+    <bpmn:serviceTask id="Activity_preauth_postSaveValidation" name="Post-Save Validation">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="postSaveValidationHandler" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0s0a7de</bpmn:incoming>
+      <bpmn:outgoing>Flow_preauth_postSaveToGateway</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_preauth_postSaveValidation" name="Post-Save Validation Passed?">
+      <bpmn:incoming>Flow_preauth_postSaveToGateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_preauth_postSavePass</bpmn:outgoing>
+      <bpmn:outgoing>Flow_preauth_postSaveFail</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_preauth_postSaveToGateway" sourceRef="Activity_preauth_postSaveValidation" targetRef="Gateway_preauth_postSaveValidation" />
+    <bpmn:sequenceFlow id="Flow_preauth_postSavePass" name="Passed" sourceRef="Gateway_preauth_postSaveValidation" targetRef="Activity_0qv99bj">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isPostSaveValidationFailed = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_preauth_postSaveFail" name="Failed" sourceRef="Gateway_preauth_postSaveValidation" targetRef="Activity_042boft">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isPostSaveValidationFailed = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_180tmra" sourceRef="Activity_0qv99bj" targetRef="Gateway_1p5r2u0" />
+    <bpmn:sequenceFlow id="Flow_13sw83s" sourceRef="Gateway_1p5r2u0" targetRef="Gateway_0lzx0hk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isCivilServantClaim = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1oipcih" name="Civil Servant PreAuth" sourceRef="Gateway_1p5r2u0" targetRef="Activity_1xl0hds">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isCivilServantClaim = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0ugkj0d" sourceRef="Activity_1xl0hds" targetRef="Gateway_0lzx0hk" />
+    <bpmn:sequenceFlow id="Flow_approve_to_doctor" name="Approve" sourceRef="Gateway_0lzx0hk" targetRef="Activity_1wqn2at">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isAutoApproved = true and isCivilServiceApproved = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ewiz50" name="Rejected" sourceRef="Gateway_0lzx0hk" targetRef="Activity_1yl2ye8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isAutoApproved = false or isCivilServiceApproved = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_doctor_to_efwa" sourceRef="Activity_1wqn2at" targetRef="Activity_checkEfwa" />
+    <bpmn:sequenceFlow id="Flow_efwa_to_gateway" sourceRef="Activity_checkEfwa" targetRef="Gateway_1vc3zh6" />
+    <bpmn:sequenceFlow id="Flow_efwa_false" sourceRef="Gateway_1vc3zh6" targetRef="Gateway_0749b15" />
+    <bpmn:sequenceFlow id="Flow_1mhgq5v" sourceRef="Gateway_1vc3zh6" targetRef="Activity_0engolr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isEfwaEnabled = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_17e3lwl" sourceRef="Activity_0engolr" targetRef="Activity_14iyyc2" />
+    <bpmn:sequenceFlow id="Flow_153xyau" sourceRef="Activity_14iyyc2" targetRef="Gateway_0vblj95" />
+    <bpmn:sequenceFlow id="Flow_ai_sent_back" name="AI Sent Back" sourceRef="Gateway_0vblj95" targetRef="Activity_042boft">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=aiDecision = "SENT_BACK"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_ai_to_normal" name="AI to Normal Flow" sourceRef="Gateway_0vblj95" targetRef="Gateway_0749b15" />
+    <bpmn:sequenceFlow id="Flow_1n3jfjd" sourceRef="Gateway_0749b15" targetRef="Activity_0mzo0j2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isDoctorApprovalRequired=true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_nodoc_to_override" sourceRef="Gateway_0749b15" targetRef="Activity_1cve9uj">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isDoctorApprovalRequired=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0r8nnwv" sourceRef="Activity_0mzo0j2" targetRef="Gateway_02qowes" />
+    <bpmn:sequenceFlow id="Flow_doc_approved_to_override" name="Approved by doctor" sourceRef="Gateway_02qowes" targetRef="Activity_1cve9uj">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isApprovedByDoc = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1coluhq" name="Rejected by doctor" sourceRef="Gateway_02qowes" targetRef="Activity_1yl2ye8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isApprovedByDoc = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1b54pkl" sourceRef="Activity_1cve9uj" targetRef="Event_0d1m7um" />
+    <bpmn:sequenceFlow id="Flow_0mtsyqu" sourceRef="Activity_1yl2ye8" targetRef="Activity_042boft" />
+    <bpmn:sequenceFlow id="Flow_1m6phn9" sourceRef="Activity_042boft" targetRef="Event_1as1l6j" />
+    <bpmn:sequenceFlow id="Flow_1q9xzbt" sourceRef="Event_1as1l6j" targetRef="PreAuthorizationInit" />
+    <bpmn:startEvent id="StartEvent_1" name="Payment requested">
+      <bpmn:outgoing>Flow_start_to_preauth</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="PreAuthorizationInit" name="Process PreAuthorization Data">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="preAuthHandler" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_start_to_preauth</bpmn:incoming>
+      <bpmn:incoming>Flow_1q9xzbt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0s0a7de</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0qv99bj" name="AutoApproval">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:output source="=isAutoApproved=true" target="isAutoApproved" />
+          <zeebe:output source="=isCivilServiceApproved = true" target="isCivilServiceApproved" />
+        </zeebe:ioMapping>
+        <zeebe:taskDefinition type="autoAdjudicationHandler" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_preauth_postSavePass</bpmn:incoming>
+      <bpmn:outgoing>Flow_180tmra</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_1p5r2u0">
+      <bpmn:incoming>Flow_180tmra</bpmn:incoming>
+      <bpmn:outgoing>Flow_13sw83s</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1oipcih</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Activity_1xl0hds" name="Civil Pre Auth Verify">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="preAuthCivilHandler" retries="2" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=isCivilServiceApproved&#10;= true" target="isCivilServiceApproved" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1oipcih</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ugkj0d</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0lzx0hk" name="Claim Status">
+      <bpmn:incoming>Flow_13sw83s</bpmn:incoming>
+      <bpmn:incoming>Flow_0ugkj0d</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ewiz50</bpmn:outgoing>
+      <bpmn:outgoing>Flow_approve_to_doctor</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Activity_1wqn2at" name="Doctor Approval">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="doctorApprovalHandler" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_approve_to_doctor</bpmn:incoming>
+      <bpmn:outgoing>Flow_doctor_to_efwa</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_checkEfwa" name="Check EFWA Eligibility">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="checkEfwaEligibilityHandler" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_doctor_to_efwa</bpmn:incoming>
+      <bpmn:outgoing>Flow_efwa_to_gateway</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_1vc3zh6" default="Flow_efwa_false">
+      <bpmn:incoming>Flow_efwa_to_gateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_efwa_false</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1mhgq5v</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="Activity_0engolr" name="AI Request">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="sendPreAuthEfwaRequest" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mhgq5v</bpmn:incoming>
+      <bpmn:outgoing>Flow_17e3lwl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:receiveTask id="Activity_14iyyc2" name="Waiting AI Notes Confirmation" messageRef="Message_AiNotesConfirmation">
+      <bpmn:incoming>Flow_17e3lwl</bpmn:incoming>
+      <bpmn:outgoing>Flow_153xyau</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:exclusiveGateway id="Gateway_0vblj95" default="Flow_ai_to_normal">
+      <bpmn:incoming>Flow_153xyau</bpmn:incoming>
+      <bpmn:outgoing>Flow_ai_sent_back</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ai_to_normal</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0749b15">
+      <bpmn:incoming>Flow_efwa_false</bpmn:incoming>
+      <bpmn:incoming>Flow_ai_to_normal</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n3jfjd</bpmn:outgoing>
+      <bpmn:outgoing>Flow_nodoc_to_override</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_0mzo0j2" name="Review by Doctor">
+      <bpmn:extensionElements>
+        <zeebe:executionListeners>
+          <zeebe:executionListener eventType="start" type="preAuthAssignedToDocStartEvent" />
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1n3jfjd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0r8nnwv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_02qowes">
+      <bpmn:incoming>Flow_0r8nnwv</bpmn:incoming>
+      <bpmn:outgoing>Flow_doc_approved_to_override</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1coluhq</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Activity_1cve9uj" name="PreAuth Completion">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="handlePreAuthApprovedEvent" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_nodoc_to_override</bpmn:incoming>
+      <bpmn:incoming>Flow_doc_approved_to_override</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b54pkl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0d1m7um">
+      <bpmn:incoming>Flow_1b54pkl</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1yl2ye8" name="Mark Auth as Rejected">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="handleClaimAutoAdjFail" retries="2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ewiz50</bpmn:incoming>
+      <bpmn:incoming>Flow_1coluhq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mtsyqu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_042boft" name="Return back to Provider">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="handlePreAuthReturnedEvent" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0mtsyqu</bpmn:incoming>
+      <bpmn:incoming>Flow_ai_sent_back</bpmn:incoming>
+      <bpmn:incoming>Flow_preauth_postSaveFail</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m6phn9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="Event_1as1l6j" name="Return to Sender">
+      <bpmn:incoming>Flow_1m6phn9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1q9xzbt</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_05ww9im" messageRef="Message_3dttrre" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmn:error id="Error_04fwyr5" name="Invalid expiry date error" errorCode="creditCardError" />
+  <bpmn:message id="Message_34pv5cc" name="Message_34pv5cc" />
+  <bpmn:message id="Message_3mml6qq" name="paymentStatusMsg">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=paymentStatus" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:signal id="Signal_12upvvs" name="markFor" />
+  <bpmn:message id="Message_3dttrre" name="preAuthResubmit">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=claimId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_AiNotesConfirmation" name="receiveEfwaNotes">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=claimId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="civilPreAuthProcess">
+      <bpmndi:BPMNShape id="Activity_preauth_postSaveValidation_di" bpmnElement="Activity_preauth_postSaveValidation">
+        <dc:Bounds x="600" y="370" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_preauth_postSaveValidation_di" bpmnElement="Gateway_preauth_postSaveValidation" isMarkerVisible="true">
+        <dc:Bounds x="725" y="385" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="725" y="442" width="51" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Activity_1a89rl5_di" bpmnElement="Activity_0qv99bj">
+        <dc:Bounds x="700" y="237" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1p5r2u0_di" bpmnElement="Gateway_1p5r2u0" isMarkerVisible="true">
+        <dc:Bounds x="895" y="252" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1y1pdts_di" bpmnElement="Activity_1xl0hds">
+        <dc:Bounds x="870" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0lzx0hk_di" bpmnElement="Gateway_0lzx0hk" isMarkerVisible="true">
+        <dc:Bounds x="1045" y="252" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1088" y="243" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0t6if4s_di" bpmnElement="Activity_1wqn2at">
+        <dc:Bounds x="1190" y="237" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_checkEfwa_di" bpmnElement="Activity_checkEfwa">
+        <dc:Bounds x="1390" y="237" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1vc3zh6_di" bpmnElement="Gateway_1vc3zh6" isMarkerVisible="true">
+        <dc:Bounds x="1585" y="252" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1la2h6z_di" bpmnElement="Activity_0engolr">
+        <dc:Bounds x="1560" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1epip57_di" bpmnElement="Activity_14iyyc2">
+        <dc:Bounds x="1760" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0vblj95_di" bpmnElement="Gateway_0vblj95" isMarkerVisible="true">
+        <dc:Bounds x="1945" y="455" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0749b15_di" bpmnElement="Gateway_0749b15" isMarkerVisible="true">
+        <dc:Bounds x="2085" y="252" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1kojx3c_di" bpmnElement="Activity_0mzo0j2">
+        <dc:Bounds x="2060" y="370" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_02qowes_di" bpmnElement="Gateway_02qowes" isMarkerVisible="true">
+        <dc:Bounds x="2085" y="515" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17xaof4_di" bpmnElement="Activity_1cve9uj">
+        <dc:Bounds x="2270" y="237" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0d1m7um_di" bpmnElement="Event_0d1m7um">
+        <dc:Bounds x="2470" y="259" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cp536d_di" bpmnElement="Activity_1yl2ye8">
+        <dc:Bounds x="1020" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="162" y="259" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="302" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05p699l_di" bpmnElement="PreAuthorizationInit">
+        <dc:Bounds x="390" y="237" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_042boft_di" bpmnElement="Activity_042boft">
+        <dc:Bounds x="390" y="590" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1as1l6j_di" bpmnElement="Event_1as1l6j">
+        <dc:Bounds x="422" y="462" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="328" y="473" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_start_to_preauth_di" bpmnElement="Flow_start_to_preauth">
+        <di:waypoint x="198" y="277" />
+        <di:waypoint x="390" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0s0a7de_di" bpmnElement="Flow_0s0a7de">
+        <di:waypoint x="490" y="277" />
+        <di:waypoint x="650" y="277" />
+        <di:waypoint x="650" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_preauth_postSaveToGateway_di" bpmnElement="Flow_preauth_postSaveToGateway">
+        <di:waypoint x="700" y="410" />
+        <di:waypoint x="725" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_preauth_postSavePass_di" bpmnElement="Flow_preauth_postSavePass">
+        <di:waypoint x="750" y="385" />
+        <di:waypoint x="750" y="317" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="747" y="341" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_preauth_postSaveFail_di" bpmnElement="Flow_preauth_postSaveFail">
+        <di:waypoint x="750" y="435" />
+        <di:waypoint x="750" y="630" />
+        <di:waypoint x="490" y="630" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="750" y="530" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_180tmra_di" bpmnElement="Flow_180tmra">
+        <di:waypoint x="800" y="277" />
+        <di:waypoint x="895" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13sw83s_di" bpmnElement="Flow_13sw83s">
+        <di:waypoint x="945" y="277" />
+        <di:waypoint x="1045" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oipcih_di" bpmnElement="Flow_1oipcih">
+        <di:waypoint x="920" y="252" />
+        <di:waypoint x="920" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="840" y="203" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ugkj0d_di" bpmnElement="Flow_0ugkj0d">
+        <di:waypoint x="970" y="120" />
+        <di:waypoint x="1070" y="120" />
+        <di:waypoint x="1070" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_approve_to_doctor_di" bpmnElement="Flow_approve_to_doctor">
+        <di:waypoint x="1095" y="277" />
+        <di:waypoint x="1190" y="277" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1125" y="283" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ewiz50_di" bpmnElement="Flow_1ewiz50">
+        <di:waypoint x="1070" y="302" />
+        <di:waypoint x="1070" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1078" y="393" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_doctor_to_efwa_di" bpmnElement="Flow_doctor_to_efwa">
+        <di:waypoint x="1290" y="277" />
+        <di:waypoint x="1390" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_efwa_to_gateway_di" bpmnElement="Flow_efwa_to_gateway">
+        <di:waypoint x="1490" y="277" />
+        <di:waypoint x="1585" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_efwa_false_di" bpmnElement="Flow_efwa_false">
+        <di:waypoint x="1635" y="277" />
+        <di:waypoint x="2085" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mhgq5v_di" bpmnElement="Flow_1mhgq5v">
+        <di:waypoint x="1610" y="302" />
+        <di:waypoint x="1610" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17e3lwl_di" bpmnElement="Flow_17e3lwl">
+        <di:waypoint x="1660" y="480" />
+        <di:waypoint x="1760" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_153xyau_di" bpmnElement="Flow_153xyau">
+        <di:waypoint x="1860" y="480" />
+        <di:waypoint x="1945" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ai_sent_back_di" bpmnElement="Flow_ai_sent_back">
+        <di:waypoint x="1970" y="505" />
+        <di:waypoint x="1970" y="730" />
+        <di:waypoint x="440" y="730" />
+        <di:waypoint x="440" y="670" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1199" y="713" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ai_to_normal_di" bpmnElement="Flow_ai_to_normal">
+        <di:waypoint x="1970" y="455" />
+        <di:waypoint x="1970" y="277" />
+        <di:waypoint x="2085" y="277" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1991" y="259" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n3jfjd_di" bpmnElement="Flow_1n3jfjd">
+        <di:waypoint x="2110" y="302" />
+        <di:waypoint x="2110" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_nodoc_to_override_di" bpmnElement="Flow_nodoc_to_override">
+        <di:waypoint x="2135" y="277" />
+        <di:waypoint x="2270" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0r8nnwv_di" bpmnElement="Flow_0r8nnwv">
+        <di:waypoint x="2110" y="450" />
+        <di:waypoint x="2110" y="515" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_doc_approved_to_override_di" bpmnElement="Flow_doc_approved_to_override">
+        <di:waypoint x="2135" y="540" />
+        <di:waypoint x="2320" y="540" />
+        <di:waypoint x="2320" y="317" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2195" y="506" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1coluhq_di" bpmnElement="Flow_1coluhq">
+        <di:waypoint x="2085" y="540" />
+        <di:waypoint x="1120" y="540" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1570" y="506" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b54pkl_di" bpmnElement="Flow_1b54pkl">
+        <di:waypoint x="2370" y="277" />
+        <di:waypoint x="2470" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mtsyqu_di" bpmnElement="Flow_0mtsyqu">
+        <di:waypoint x="1070" y="580" />
+        <di:waypoint x="1070" y="730" />
+        <di:waypoint x="440" y="730" />
+        <di:waypoint x="440" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m6phn9_di" bpmnElement="Flow_1m6phn9">
+        <di:waypoint x="440" y="590" />
+        <di:waypoint x="440" y="498" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q9xzbt_di" bpmnElement="Flow_1q9xzbt">
+        <di:waypoint x="440" y="462" />
+        <di:waypoint x="440" y="317" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

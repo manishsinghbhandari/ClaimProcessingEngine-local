@@ -1,0 +1,82 @@
+[
+  {
+    "code": "SHA-01",
+    "categoryName": "Ambulance and Emergency Services"
+  },
+  {
+    "code": "SHA-02",
+    "categoryName": "Assistive Devices"
+  },
+  {
+    "code": "SHA-03",
+    "categoryName": "Critical Care Services"
+  },
+  {
+    "code": "SHA-04",
+    "categoryName": "End of Life Services"
+  },
+  {
+    "code": "SHA-05",
+    "categoryName": "Optical Health Services"
+  },
+  {
+    "code": "SHA-06",
+    "categoryName": "Hematology and Oncology Services"
+  },
+  {
+    "code": "SHA-07",
+    "categoryName": "Inpatient Services"
+  },
+  {
+    "code": "SHA-08",
+    "categoryName": "Maternity and Child Health Services"
+  },
+  {
+    "code": "SHA-09",
+    "categoryName": "Medical Imaging & Other Investigations"
+  },
+  {
+    "code": "SHA-10",
+    "categoryName": "Mental Wellness Services"
+  },
+  {
+    "code": "SHA-11",
+    "categoryName": "Oral Health Services"
+  },
+  {
+    "code": "SHA-12",
+    "categoryName": "Outpatient Services"
+  },
+  {
+    "code": "SHA-13",
+    "categoryName": "Palliative Care Services"
+  },
+  {
+    "code": "SHA-14",
+    "categoryName": "Pharmacy Services"
+  },
+  {
+    "code": "SHA-15",
+    "categoryName": "Rehabilitation Services"
+  },
+  {
+    "code": "SHA-16",
+    "categoryName": "Renal Care Services"
+  },
+  {
+    "code": "SHA-17",
+    "categoryName": "Screening"
+  },
+  {
+    "code": "SHA-18",
+    "categoryName": "Essential Diagnostic Laboratory Listing for NCDs"
+  },
+  {
+    "code": "SHA-19",
+    "categoryName": "Surgical Services"
+  },
+  {
+    "code": "SHA-20",
+    "categoryName": "Overseas Treatment"
+  }
+]

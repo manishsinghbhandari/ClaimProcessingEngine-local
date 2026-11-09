@@ -1,0 +1,23 @@
+replicaCount: 3
+
+image:
+  repository: cloud-taifacare.dha.go.ke/taifa/claimprocessingengine
+  tag: dev-2026-01-14-13-05
+  pullPolicy: Always
+
+env:
+  SPRING_PROFILES_ACTIVE: uhc-dev
+  JAVA_OPTS: "-Dlogging.level.io.camunda.zeebe.client.impl.ZeebeCallCredentials=ERROR -Dspring.cloud.kubernetes.leader.config-map-name=my-config-map -Dredis.host=10.106.16.112 -Dredis.port=6379 -Dcamunda.client.zeebe.base-url=http://10.97.165.94:26500/rest/ -Dcamunda.client.zeebe.gateway-url=http://10.10.100.118:26500"
+
+
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  enabled: true
+  name: claimprocessingengine-uhc-config
+  volumeName: uhc-dev-config
+  mountPath: /config

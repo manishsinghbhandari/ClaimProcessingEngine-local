@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:tns="http://bpmn.io/schema/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" exporter="Camunda Modeler" exporterVersion="5.27.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_192tvnm" name="" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <bpmn:error errorCode="creditCardError" id="Error_04fwyr5" name="Invalid expiry date error"/>
+  <bpmn:message id="Message_34pv5cc" name="Message_34pv5cc"/>
+  <bpmn:message id="Message_3mml6qq" name="paymentStatusMsg">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=paymentStatus"/>
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_3dttrre" name="preAuthResubmit">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=claimId"/>
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:process id="preAuthProcess" isClosed="false" isExecutable="true" name="PreAuth Approval processv1" processType="None">
+    <bpmn:extensionElements>
+      <yaoqiang:description/>
+      <yaoqiang:pageFormat height="841.8897637795276" imageableHeight="831.8897637795276" imageableWidth="588.1102362204724" imageableX="5.0" imageableY="5.0" orientation="0" width="598.1102362204724"/>
+      <yaoqiang:page background="#FFFFFF" horizontalCount="2" verticalCount="1"/>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="StartEvent_1" isInterrupting="true" name="Payment requested" parallelMultiple="false">
+      <bpmn:outgoing>Flow_1mhaask</bpmn:outgoing>
+      <bpmn:outputSet/>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1mhaask" sourceRef="StartEvent_1" targetRef="PreAuthorizationInit"/>
+    <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0lzx0hk" name="Claim Status">
+      <bpmn:incoming>Flow_1r8tmqa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ewiz50</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1g59nlo</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask completionQuantity="1" id="PreAuthorizationInit" implementation="##WebService" isForCompensation="false" name="Process PreAuthorization Data" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="preAuthHandler"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mhaask</bpmn:incoming>
+      <bpmn:incoming>Flow_1q9xzbt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0s0a7de</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0s0a7de" sourceRef="PreAuthorizationInit" targetRef="Activity_0qv99bj"/>
+    <bpmn:sequenceFlow id="Flow_1r8tmqa" sourceRef="Activity_0qv99bj" targetRef="Gateway_0lzx0hk"/>
+    <bpmn:sequenceFlow id="Flow_1ewiz50" name="Rejected" sourceRef="Gateway_0lzx0hk" targetRef="Activity_1yl2ye8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=isAutoApproved = false]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1g59nlo" sourceRef="Gateway_0lzx0hk" targetRef="doctor_approval">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=isAutoApproved = true]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask completionQuantity="1" id="doctor_approval" implementation="##WebService" isForCompensation="false" name="Is Doctor Approval required?" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="doctorApprovalHandler"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1g59nlo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gzu8cm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0749b15">
+      <bpmn:incoming>Flow_1gzu8cm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fejuzq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1n3jfjd</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1gzu8cm" sourceRef="doctor_approval" targetRef="Gateway_0749b15"/>
+    <bpmn:sequenceFlow id="Flow_0fejuzq" name="No" sourceRef="Gateway_0749b15" targetRef="Activity_1wqn2at">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=true=true]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0d1m7um">
+      <bpmn:incoming>Flow_0ou2sj8</bpmn:incoming>
+      <bpmn:inputSet/>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ou2sj8" sourceRef="Activity_1wqn2at" targetRef="Event_0d1m7um"/>
+    <bpmn:sequenceFlow id="Flow_1n3jfjd" sourceRef="Gateway_0749b15" targetRef="Activity_0mzo0j2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=isDoctorApprovalRequired=true]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask completionQuantity="1" id="Activity_0mzo0j2" implementation="##unspecified" isForCompensation="false" name="Review by Doctor" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:executionListeners>
+          <executionListeners>
+            <zeebe:executionListener eventType="start" type="preAuthAssignedToDocStartEvent"/>
+          </executionListeners>
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1n3jfjd</bpmn:incoming>
+      <bpmn:outgoing>Flow_18fcmk3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_07b9qid" name="approved" sourceRef="Gateway_02qowes" targetRef="Activity_1wqn2at">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=isApprovedByDoc]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_02qowes">
+      <bpmn:incoming>Flow_18fcmk3</bpmn:incoming>
+      <bpmn:outgoing>Flow_07b9qid</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1coluhq</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_18fcmk3" sourceRef="Activity_0mzo0j2" targetRef="Gateway_02qowes"/>
+    <bpmn:serviceTask completionQuantity="1" id="Activity_1yl2ye8" implementation="##WebService" isForCompensation="false" name="Mark Auth as Rejected" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="handleClaimAutoAdjFail"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ewiz50</bpmn:incoming>
+      <bpmn:incoming>Flow_1coluhq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mtsyqu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1coluhq" name="rejected by doctor" sourceRef="Gateway_02qowes" targetRef="Activity_1yl2ye8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[=isApprovedByDoc = false]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0mtsyqu" sourceRef="Activity_1yl2ye8" targetRef="Activity_0q3jbfh"/>
+    <bpmn:userTask completionQuantity="1" id="Activity_0q3jbfh" implementation="##unspecified" isForCompensation="false" name="SHA Review" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:executionListeners>
+          <executionListeners>
+            <zeebe:executionListener eventType="start" retries="2" type="preAuthShaReviewStart"/>
+          </executionListeners>
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0mtsyqu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a5sa1q</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1a5sa1q" name="Return to sender" sourceRef="Activity_0q3jbfh" targetRef="Activity_042boft"/>
+    <bpmn:serviceTask completionQuantity="1" id="Activity_0qv99bj" implementation="##WebService" isForCompensation="false" name="AutoApproval" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <ioMapping>
+            <zeebe:output source="=isAutoApproved=true" target="isAutoApproved"/>
+          </ioMapping>
+        </zeebe:ioMapping>
+        <zeebe:taskDefinition retries="3" type="autoAdjudicationHandler"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0s0a7de</bpmn:incoming>
+      <bpmn:outgoing>Flow_1r8tmqa</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask completionQuantity="1" id="Activity_1wqn2at" implementation="##WebService" isForCompensation="false" name="PreAuthorization Approved" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition retries="3" type="handlePreAuthApprovedEvent"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0fejuzq</bpmn:incoming>
+      <bpmn:incoming>Flow_07b9qid</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ou2sj8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="Event_1as1l6j" name="Return to Sender" parallelMultiple="false">
+      <bpmn:incoming>Flow_1m6phn9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1q9xzbt</bpmn:outgoing>
+      <bpmn:outputSet/>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_05ww9im" messageRef="Message_3dttrre"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1q9xzbt" sourceRef="Event_1as1l6j" targetRef="PreAuthorizationInit"/>
+    <bpmn:serviceTask completionQuantity="1" id="Activity_042boft" implementation="##WebService" isForCompensation="false" name="Return back to Provider" startQuantity="1">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition retries="3" type="handlePreAuthReturnedEvent"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1a5sa1q</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m6phn9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1m6phn9" sourceRef="Activity_042boft" targetRef="Event_1as1l6j"/>
+  </bpmn:process>
+  <bpmn:signal id="Signal_12upvvs" name="markFor"/>
+  <bpmndi:BPMNDiagram id="Yaoqiang_Diagram-preAuthProcess" name="Untitled Diagram" resolution="96.0">
+    <bpmndi:BPMNPlane bpmnElement="preAuthProcess">
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="Yaoqiang-StartEvent_1">
+        <dc:Bounds height="32.0" width="32.0" x="162.0" y="119.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="108.0" x="126.5" y="166.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Gateway_0lzx0hk" id="Yaoqiang-Gateway_0lzx0hk" isMarkerVisible="true">
+        <dc:Bounds height="42.0" width="42.0" x="595.0" y="112.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="72.0" x="584.5" y="88.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="PreAuthorizationInit" id="Yaoqiang-PreAuthorizationInit">
+        <dc:Bounds height="80.0" width="100.0" x="270.0" y="97.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="46.96" width="90.0" x="275.0" y="115.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="doctor_approval" id="Yaoqiang-doctor_approval">
+        <dc:Bounds height="80.0" width="100.0" x="740.0" y="97.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="46.96" width="57.0" x="761.5" y="115.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Gateway_0749b15" id="Yaoqiang-Gateway_0749b15" isMarkerVisible="true">
+        <dc:Bounds height="42.0" width="42.0" x="910.0" y="112.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="928.0" y="156.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Event_0d1m7um" id="Yaoqiang-Event_0d1m7um">
+        <dc:Bounds height="32.0" width="32.0" x="1312.0" y="119.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="1325.0" y="159.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_0mzo0j2" id="Yaoqiang-Activity_0mzo0j2">
+        <dc:Bounds height="80.0" width="100.0" x="885.0" y="240.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="58.0" x="906.0" y="265.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Gateway_02qowes" id="Yaoqiang-Gateway_02qowes" isMarkerVisible="true">
+        <dc:Bounds height="42.0" width="42.0" x="910.0" y="375.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="928.0" y="419.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_1yl2ye8" id="Yaoqiang-Activity_1yl2ye8">
+        <dc:Bounds height="80.0" width="100.0" x="570.0" y="360.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="76.0" x="582.0" y="385.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_0q3jbfh" id="Yaoqiang-Activity_0q3jbfh">
+        <dc:Bounds height="80.0" width="100.0" x="570.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="67.0" x="586.5" y="582.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_0qv99bj" id="Yaoqiang-Activity_0qv99bj">
+        <dc:Bounds height="80.0" width="100.0" x="433.0" y="97.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="81.0" x="442.5" y="129.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_1wqn2at" id="Yaoqiang-Activity_1wqn2at">
+        <dc:Bounds height="80.0" width="100.0" x="1090.0" y="97.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="90.0" x="1095.0" y="122.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Event_1as1l6j" id="Yaoqiang-Event_1as1l6j">
+        <dc:Bounds height="32.0" width="32.0" x="302.0" y="312.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="96.0" x="199.0" y="320.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_042boft" id="Yaoqiang-Activity_042boft">
+        <dc:Bounds height="80.0" width="100.0" x="270.0" y="430.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="84.0" x="278.0" y="455.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1q9xzbt" id="Yaoqiang-Flow_1q9xzbt">
+        <di:waypoint x="318.0" y="312.1675347457709"/>
+        <di:waypoint x="318.0" y="177.16666666666663"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="315.0" y="235.19"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0ou2sj8" id="Yaoqiang-Flow_0ou2sj8">
+        <di:waypoint x="1189.8333333333333" y="137.0"/>
+        <di:waypoint x="1311.8342014124376" y="135.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="1248.0" y="126.69"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1coluhq" id="Yaoqiang-Flow_1coluhq">
+        <di:waypoint x="909.9999999999999" y="396.0"/>
+        <di:waypoint x="669.8333333333333" y="400.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="150.0" x="715.0" y="381.61"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_18fcmk3" id="Yaoqiang-Flow_18fcmk3">
+        <di:waypoint x="931.0" y="320.16666666666663"/>
+        <di:waypoint x="931.0" y="375.33333333333337"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="928.0" y="338.27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1mhaask" id="Yaoqiang-Flow_1mhaask">
+        <di:waypoint x="193.8324652542289" y="135.0"/>
+        <di:waypoint x="269.83333333333326" y="137.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="229.0" y="126.36"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1r8tmqa" id="Yaoqiang-Flow_1r8tmqa">
+        <di:waypoint x="532.8333333333333" y="137.0"/>
+        <di:waypoint x="594.9999999999999" y="133.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="561.0" y="125.61"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0s0a7de" id="Yaoqiang-Flow_0s0a7de">
+        <di:waypoint x="369.83333333333326" y="137.0"/>
+        <di:waypoint x="432.83333333333326" y="137.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="398.33" y="127.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0mtsyqu" id="Yaoqiang-Flow_0mtsyqu">
+        <di:waypoint x="620.0" y="440.16666666666663"/>
+        <di:waypoint x="620.0" y="550.1666666666666"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="617.0" y="485.69"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1a5sa1q" id="Yaoqiang-Flow_1a5sa1q">
+        <di:waypoint x="569.8333333333333" y="590.0000000000001"/>
+        <di:waypoint x="320.0" y="590.0"/>
+        <di:waypoint x="320.0" y="510.16666666666663"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="96.0" x="357.0" y="580.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1gzu8cm" id="Yaoqiang-Flow_1gzu8cm">
+        <di:waypoint x="839.8333333333333" y="137.0"/>
+        <di:waypoint x="909.9999999999999" y="133.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="872.0" y="125.61"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1ewiz50" id="Yaoqiang-Flow_1ewiz50">
+        <di:waypoint x="616.0" y="153.9999999999999"/>
+        <di:waypoint x="616.0" y="360.16666666666663"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="143.0" x="544.5" y="240.61"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0fejuzq" id="Yaoqiang-Flow_0fejuzq">
+        <di:waypoint x="951.6666666666666" y="133.0"/>
+        <di:waypoint x="1089.8333333333333" y="137.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="68.0" x="987.0" y="118.27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1g59nlo" id="Yaoqiang-Flow_1g59nlo">
+        <di:waypoint x="636.6666666666666" y="133.0"/>
+        <di:waypoint x="739.8333333333333" y="137.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="140.0" x="618.5" y="125.27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1m6phn9" id="Yaoqiang-Flow_1m6phn9">
+        <di:waypoint x="318.0" y="430.16666666666663"/>
+        <di:waypoint x="318.0" y="344.16579858756234"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="315.0" y="377.69"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1n3jfjd" id="Yaoqiang-Flow_1n3jfjd">
+        <di:waypoint x="931.0" y="153.9999999999999"/>
+        <di:waypoint x="931.0" y="240.16666666666663"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="189.0" x="836.5" y="187.61"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_07b9qid" id="Yaoqiang-Flow_07b9qid">
+        <di:waypoint x="947.9999999999999" y="400.0"/>
+        <di:waypoint x="1140.0" y="400.0"/>
+        <di:waypoint x="1140.0" y="177.16666666666663"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.96" width="110.0" x="1085.0" y="368.11"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

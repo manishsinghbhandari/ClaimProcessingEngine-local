@@ -1,0 +1,157 @@
+[
+  {
+    "code": "SHA-01",
+    "categoryName": "Ambulance and Emergency Services",
+    "subCategoryName": [
+      "EMERGENCY",
+      "EVACUATIONS"
+    ]
+  },
+  {
+    "code": "SHA-02",
+    "categoryName": "Assistive Devices",
+    "subCategoryName": [
+      "ASSISTIVE DEVICES"
+    ]
+  },
+  {
+    "code": "SHA-03",
+    "categoryName": "Critical Care",
+    "subCategoryName": [
+      "CRITICAL CARE"
+    ]
+  },
+  {
+    "code": "SHA-04",
+    "categoryName": "Essential Laboratory Services",
+    "subCategoryName": [
+      "COPD",
+      "DIABETIC PATIENTS",
+      "HYPERTENSIVE AND CARDIAC PATIENTS",
+      "SICKLE CELL AND ANAEMIA"
+    ]
+  },
+  {
+    "code": "SHA-05",
+    "categoryName": "Eye Health",
+    "subCategoryName": [
+      "OPTICAL HEALTH SERVICES"
+    ]
+  },
+  {
+    "code": "SHA-06",
+    "categoryName": "Hematology-Oncology",
+    "subCategoryName": [
+      "HEMATO - ONCOLOGY TREATMENT",
+      "ONCOLOGY DIAGNOSIS & STAGING"
+    ]
+  },
+  {
+    "code": "SHA-07",
+    "categoryName": "Inpatient Services",
+    "subCategoryName": [
+      "INPATIENT",
+      "INPATIENT CRITICAL CARE",
+      "MATERNAL AND NEW BORN COMPLICATIONS"
+    ]
+  },
+  {
+    "code": "SHA-08",
+    "categoryName": "Maternity & New Born Health",
+    "subCategoryName": [
+      "MATERNITY & NEW BORN HEALTH",
+      "MATERNITY, NEONATAL AND CHILD HEALTH SERVICES"
+    ]
+  },
+  {
+    "code": "SHA-09",
+    "categoryName": "Medical Imaging",
+    "subCategoryName": [
+      "MEDICAL IMAGING"
+    ]
+  },
+  {
+    "code": "SHA-10",
+    "categoryName": "Mental Wellness",
+    "subCategoryName": [
+      "MENTAL WELLNESS"
+    ]
+  },
+  {
+    "code": "SHA-11",
+    "categoryName": "Mortuary",
+    "subCategoryName": [
+      "END OF LIFE"
+    ]
+  },
+  {
+    "code": "SHA-12",
+    "categoryName": "Oral Health",
+    "subCategoryName": [
+      "ORAL HEALTH"
+    ]
+  },
+  {
+    "code": "SHA-13",
+    "categoryName": "Outpatient Services",
+    "subCategoryName": [
+      "OUTPATIENT: MCH",
+      "OUTPATIENT: PHC",
+      "OUTPATIENT: SHIF"
+    ]
+  },
+  {
+    "code": "SHA-14",
+    "categoryName": "Overseas Treatment",
+    "subCategoryName": [
+      "OVERSEAS TREATMENT"
+    ]
+  },
+  {
+    "code": "SHA-15",
+    "categoryName": "Palliative Care",
+    "subCategoryName": [
+      "PALLIATIVE SERVICES"
+    ]
+  },
+  {
+    "code": "SHA-16",
+    "categoryName": "Rehabilitative Services",
+    "subCategoryName": [
+      "REHABILITATIVE SERVICES"
+    ]
+  },
+  {
+    "code": "SHA-17",
+    "categoryName": "Renal Care Package",
+    "subCategoryName": [
+      "RENAL CARE PACKAGE"
+    ]
+  },
+  {
+    "code": "SHA-18",
+    "categoryName": "Screening",
+    "subCategoryName": [
+      "SCREENING AND MANAGEMENT OF PRE CANCEROUS LESIONS"
+    ]
+  },
+  {
+    "code": "SHA-19",
+    "categoryName": "Surgical Services",
+    "subCategoryName": [
+      "CARDIOTHORACIC AND VASCULAR SURGERY",
+      "EAR NOSE & THROAT SURGERY",
+      "GENERAL SURGERY",
+      "INTERVENTIONAL RADIOLOGY",
+      "MAXILLOFACIAL SURGERY",
+      "NEUROSURGERY",
+      "OBSTETRICS AND GYNAECOLOGICAL SURGERY",
+      "OPHTHALMIC",
+      "ORTHOPAEDIC",
+      "PAEDIATRIC SURGERY",
+      "PLASTIC SURGERY",
+      "UROLOGICAL SURGERY",
+      "CARDIOLOGY"
+    ]
+  }
+]

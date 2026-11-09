@@ -1,0 +1,2486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:feel="http://www.omg.org/spec/FEEL/20140401" id="decision_table_example" name="DecisionTableExample" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.27.0">
+  <decision id="decision1" name="SHA Approval Decision">
+    <decisionTable id="decisionTable1" hitPolicy="FIRST">
+      <input id="InputClause_1nen6ic" label="code">
+        <inputExpression id="LiteralExpression_0qw4pni" typeRef="string">
+          <text>code</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1xhao26" label="serviceCategory">
+        <inputExpression id="LiteralExpression_1y4rdh1" typeRef="string">
+          <text>serviceCategory</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1xe2r0v">
+          <text>"outpatient","inpatient"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1h2kyod" label="hasPreAuth">
+        <inputExpression id="LiteralExpression_1n96rzs" typeRef="boolean">
+          <text>hasPreAuth</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_19f6yd8" label="facilityCategory" biodi:width="192">
+        <inputExpression id="LiteralExpression_0a5cnck" typeRef="string">
+          <text>facilityCategory</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0lbuxqc">
+          <text>"Level 1","Level 2","Level 3","Level 4","Level 5","Level 6","Level 7","Level 8","Level 9","Level 10"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_15e19um" label="gender">
+        <inputExpression id="LiteralExpression_0dgxubq" typeRef="string">
+          <text>gender</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_18v1tt6" label="age">
+        <inputExpression id="LiteralExpression_1cqv5vz" typeRef="integer">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0o59fg4" label="interventionUsageCount">
+        <inputExpression id="LiteralExpression_12obpp0" typeRef="string">
+          <text>interventionUsageCount</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0c4qh05" label="claimAmount">
+        <inputExpression id="LiteralExpression_0c2lqgk" typeRef="string">
+          <text>claimAmount</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0m400eh" label="individualUsage">
+        <inputExpression id="LiteralExpression_063w5ml" typeRef="string">
+          <text>individualUsage</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0rethcn" label="limitType">
+        <inputExpression id="LiteralExpression_0r3qctp" typeRef="string">
+          <text>limitType</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0pkaeuo" name="isAutoApproved" typeRef="boolean" />
+      <rule id="DecisionRule_0uhl62q">
+        <inputEntry id="UnaryTests_0j07oht">
+          <text>"SHA-01-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kgqoct">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hjyth7">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ncd8cz">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a4gh7r">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1shlsku">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1aopws7">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v3nsfh">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rjei34">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11aiw10">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14t9pxm">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0d25gt6">
+        <inputEntry id="UnaryTests_0cc536p">
+          <text>"SHA-01-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s6q8hl">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18lmc2l">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qagfnj">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13a9b8r">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ruddrz">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x62mjk">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10er2dr">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0loqzut">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kreajn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m023v3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13rrl2c">
+        <inputEntry id="UnaryTests_1qvqvsf">
+          <text>"SHA-01-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r5ilep">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q8bb30">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pdv1iz">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mbrgaf">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nu7t2e">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_186s67l">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a5an5c">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07w32j6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jjmre6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cu3h89">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ayjz0a">
+        <inputEntry id="UnaryTests_1tm54ms">
+          <text>"SHA-01-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fua0tw">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07lehzf">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nf1g0u">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mpao2p">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09vtrtn">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1anvebc">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1icgqmq">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vbch8r">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a3j7oi">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jtw3vm">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wv29sm">
+        <inputEntry id="UnaryTests_16znugd">
+          <text>"SHA-01-005"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18yrcvu">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zh76vb">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08avb3h">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qqztg7">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oq5hx4">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ijp02p">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0leeoyh">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e53xpn">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k395wh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03qoih3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07j04qj">
+        <inputEntry id="UnaryTests_0zevkmh">
+          <text>"SHA-01-006"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1q5n8mw">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lrcjl3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u27gj1">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0iese68">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rf27gq">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17nimai">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04qr95v">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gnbsxv">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rkea02">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0a5g3mu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1r8z840">
+        <inputEntry id="UnaryTests_15wtxz6">
+          <text>"SHA-01-007"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xltynk">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0panb1n">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i2hi4d">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yuaa17">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mwf6ix">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rvb3pg">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p6jpte">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1flm2qt">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pxo86k">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n1vxpy">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k69ldn">
+        <inputEntry id="UnaryTests_1bi3siw">
+          <text>"SHA-01-008"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mids8k">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x7n8wy">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16xiioc">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1flbznh">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kui6vs">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08ofvop">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lnt4tu">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jbhvtz">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lgwrnx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_053kz6d">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s7tlsy">
+        <inputEntry id="UnaryTests_04p3ccr">
+          <text>"SHA-01-009"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06lpiyc">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gwhrfo">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oqxvc6">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t4aoe3">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10o8tjj">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x9rkcy">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a2ey43">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0onkci6">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_189db6f">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11kcyfc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wt95zw">
+        <inputEntry id="UnaryTests_07i6066">
+          <text>"SHA-01-010"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kray8r">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08yukdh">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jq3k72">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04av022">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oeimyg">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hiwvrk">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_189ielr">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09zzrl1">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dto3zx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ygohrx">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14s3rzi">
+        <inputEntry id="UnaryTests_0ut5a4b">
+          <text>"SHA-01-011"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01q97z5">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ueywf3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o5uidm">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l19xdd">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06w391z">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rth96r">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mjoj5k">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uu2zwi">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gbdrjt">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ynun7s">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xa8g10">
+        <inputEntry id="UnaryTests_0aumiho">
+          <text>"SHA-01-012"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nbbcqq">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1532bx6">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04azsv7">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03k1lhe">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12fg944">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ati0vl">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14r0qu4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cqsioe">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1q3izj9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1k1c8xj">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06iuati">
+        <inputEntry id="UnaryTests_1w24ezh">
+          <text>"SHA-03-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wsal6a">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q5jgqz">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mjsrw9">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ruxdck">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12km8lw">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13yyh03">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eugbs4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0auay4k">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o3isda">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gj0tof">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01mjptp">
+        <inputEntry id="UnaryTests_07iufgn">
+          <text>"SHA-03-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gjnqtx">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m5h3bi">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f6dh1c">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oxw5mt">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nzeb7u">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wky3nc">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02ipq6k">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wq1xgd">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ztonnq">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xx7gf3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0cmuqig">
+        <inputEntry id="UnaryTests_0g287ik">
+          <text>"SHA-03-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b27pti">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18ti094">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gd49wp">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pivzrl">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gzty14">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1onud7j">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qjdhz0">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w9kurn">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tx3a9k">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1e1uqmh">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_011s62h">
+        <inputEntry id="UnaryTests_03u78ci">
+          <text>"SHA-03-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lfp3c9">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13ldq09">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dcj7df">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00cz1f5">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jshhd6">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18lo8iy">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p4e0hq">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p0hi6d">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bonw15">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xg263n">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_145xwa8">
+        <inputEntry id="UnaryTests_1ywijm5">
+          <text>"SHA-03-005"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kvuyp3">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gn1lm7">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yk8023">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1plptzr">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0krt3sg">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16z8ff2">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1waxpe4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jb7t0i">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06vz0e5">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1qu99cs">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08mnq11">
+        <inputEntry id="UnaryTests_0m27uwb">
+          <text>"SHA-08-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qwi3y3">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19qlh2m">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sqoz9z">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ryqt33">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13aii1y">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ls8mas">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c61e6p">
+          <text>&lt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07kmf7t">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r5zeeu">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1081nxf">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0gziku0">
+        <inputEntry id="UnaryTests_0sx6c9g">
+          <text>"SHA-08-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_131ywah">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15vdnyi">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07djo7j">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r9g8vt">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17ea56u">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o2ksmb">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14ym9iz">
+          <text>&lt;= 30000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06bjpvx">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lhkg4w">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0b19wtp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10t0x57">
+        <inputEntry id="UnaryTests_0lu3cf6">
+          <text>"SHA-07-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lakxr3">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dgpjj1">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bm26yt">
+          <text>"Level 3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12vl6tz">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e1bcr3">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q5pn9t">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n4xw7f">
+          <text>&lt;= 2240</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ueevrn">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0quhjnf">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hi62qr">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fpyq2z">
+        <inputEntry id="UnaryTests_15vvte8">
+          <text>"SHA-07-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p16u0s">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10pv5ov">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rx0ix9">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i7eprp">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jltsfa">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xp2ow1">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14kcunh">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0luqwba">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_164y9o1">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0drmflo">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1t5byfx">
+        <inputEntry id="UnaryTests_119x4u6">
+          <text>"SHA-07-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cpako1">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l63qxt">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1izy28d">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03ysfcv">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15unv66">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pinprd">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0suc1je">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ynu6gd">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hb9htc">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1e0yz5c">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m43vav">
+        <inputEntry id="UnaryTests_089d4qg">
+          <text>"SHA-07-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10zblwn">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cojhet">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18kupzb">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vvtybg">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_181rk19">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e5pw3n">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u1kajm">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1haicfl">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bxonwd">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fm69pm">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qhmq5i">
+        <inputEntry id="UnaryTests_1iapul8">
+          <text>"SHA-07-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bkm6gg">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rq4dlx">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ymuo1s">
+          <text>"Level 3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y2aluo">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m8smsf">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ng36ol">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ocdbgo">
+          <text>&lt;= 2240</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dskxrp">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cuqbwp">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08hsmk9">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0rwhwai">
+        <inputEntry id="UnaryTests_0sgfoug">
+          <text>"SHA-07-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xq5tuk">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y6qr95">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dyqb30">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p89h8s">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cxt92c">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05cbqgg">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1361ap6">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pyv95u">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0svnoah">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pxwskb">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04optdo">
+        <inputEntry id="UnaryTests_1wub16p">
+          <text>"SHA-07-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18id1dq">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tm5b9i">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12t5gsm">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02leqem">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1576qw3">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t6lxeb">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_083mj92">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1129wpf">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l0ru8j">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1t17j79">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ilq6dz">
+        <inputEntry id="UnaryTests_0kji4as">
+          <text>"SHA-07-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m1rm6i">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vg5cxo">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1loy4v2">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03v8zqf">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uaj865">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ragau6">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18n55yn">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11uxyn7">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tmca3a">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_134bffw">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xm06vb">
+        <inputEntry id="UnaryTests_1q73dzj">
+          <text>"SHA-07-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04x6flp">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w6wek3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tfv1li">
+          <text>"Level 3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03b4vcd">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09yxeih">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e1wzqv">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gaxi9c">
+          <text>&lt;= 2240</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wiv477">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1agsn50">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0d88xwr">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1lak2e1">
+        <inputEntry id="UnaryTests_02hna3e">
+          <text>"SHA-07-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zulfwr">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hwjl2o">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16os2in">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13uk7lk">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rajux9">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ukuleg">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rt6jn9">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03gq28b">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03euvql">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jvcfyi">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14ac97o">
+        <inputEntry id="UnaryTests_0jzgrgf">
+          <text>"SHA-07-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17eda4s">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a5haqa">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_054x7w5">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02xxkft">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dxjiy4">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ruhv7w">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_124nsty">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1apvk1e">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wzcl4g">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nl12py">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bkmky5">
+        <inputEntry id="UnaryTests_1ezxmfg">
+          <text>"SHA-07-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ok8fm3">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_087t66u">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nwig4y">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h5rxip">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11j713x">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i9ypop">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jsyjjq">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00ekj29">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15b8o2h">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06k7p91">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q2adn1">
+        <inputEntry id="UnaryTests_1wpy0ca">
+          <text>"SHA-07-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ioqbz7">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1na1g7b">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1okyf3d">
+          <text>"Level 3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z5uxhv">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t6e6jw">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12p1dkd">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wb1k74">
+          <text>&lt;= 2240</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mancjd">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_041qruc">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12xwgdc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00yijnj">
+        <inputEntry id="UnaryTests_0qu41yz">
+          <text>"SHA-07-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j4rzua">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_106p4k0">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f8ocan">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03iu565">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1etoou4">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_189r0ay">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dz79l1">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mnb3ew">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1isfv2w">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lcocn3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1arqrkk">
+        <inputEntry id="UnaryTests_1t93abz">
+          <text>"SHA-07-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pp0h8i">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n2t91p">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y69hjs">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02kpe7v">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07f24eo">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v9oi0v">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wj0h5w">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_088ov5j">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16oabtq">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0o5zxyu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0g9q5x2">
+        <inputEntry id="UnaryTests_0yx33bh">
+          <text>"SHA-07-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vhch42">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kjiolk">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mc6mml">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iofdt5">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12ujcez">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jzxrwp">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uu2o0m">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ftbtzq">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_171rilw">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cna6sj">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cphl2f">
+        <inputEntry id="UnaryTests_1few3mg">
+          <text>"SHA-12-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17mf44j">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tbuqls">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u2mdaz">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v939f4">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hss0qr">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17htkyc">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mu761g">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05j7jo7">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19ltlsa">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00e3nwx">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17pidtw">
+        <inputEntry id="UnaryTests_0rt8pk7">
+          <text>"SHA-12-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qtko39">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ch2ex0">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_069v7pm">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qmgxjm">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tzvhj7">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l7gjdo">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_047chs0">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15fzpzl">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11uhljd">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04gkg27">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0w4mbl7">
+        <inputEntry id="UnaryTests_0bzwf2n">
+          <text>"SHA-12-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cbm5ww">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v4qbrv">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0scnrn7">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ue2i0t">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k8tki4">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m2d375">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jtrzlu">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qkclyd">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0g2pq9e">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04nve29">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1thjvut">
+        <inputEntry id="UnaryTests_1sfgr1r">
+          <text>"SHA-12-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fkx2a2">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kkmruo">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18cstyc">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0is9o3f">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r5c3np">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18z00g3">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0apzw9q">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ep4ice">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j4hzfq">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jw7m8d">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0gqzpfi">
+        <inputEntry id="UnaryTests_0cowlo9">
+          <text>"SHA-12-005"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s6noil">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wu73cp">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jh9sy6">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cdrpbf">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jha2jw">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yo8jzr">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iua42h">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xze3fr">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o0h570">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n5uujo">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12192y7">
+        <inputEntry id="UnaryTests_1szbuvs">
+          <text>"SHA-12-006"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1up2zga">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0diw10w">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r7k8mq">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0va6i9v">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ahef7g">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1clduk7">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ln856v">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19ku7xj">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m2dh45">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mrgj0g">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bld4v7">
+        <inputEntry id="UnaryTests_1p6lebh">
+          <text>"SHA-12-007"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kl3tl0">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_105lpme">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_107dqhs">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wnb96s">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01wtxwu">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ct920i">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bnqeua">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17l0hdb">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c3s7ab">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11d4yfk">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nl6l10">
+        <inputEntry id="UnaryTests_0x6x2r6">
+          <text>"SHA-12-008"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y3s6rf">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j5a7fb">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kjoh48">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08iwqm9">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07qfmpi">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lbzu6v">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17vpczm">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n1pp4b">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qxhmnh">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rdz6jq">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07vzr83">
+        <inputEntry id="UnaryTests_1mdwbj4">
+          <text>"SHA-12-009"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0t2m8ju">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zwipq3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12epqfi">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1csgdg2">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0swe63u">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t9ssqw">
+          <text>&lt;= 6</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16muie8">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lj7nhd">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q4p8mk">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_027870o">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0n5wy2p">
+        <inputEntry id="UnaryTests_0mgg29u">
+          <text>"SHA-12-010"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yyc03g">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hk6bgz">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0iccid3">
+          <text>"Level 2","Level 3","Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eyoe4p">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o6lysk">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17zqluw">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ofrsw8">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1td6471">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x7qlfo">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o6qjy1">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1lej15c">
+        <inputEntry id="UnaryTests_1xwo2m3">
+          <text>"SHA-10-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pxwmn6">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0grzjlk">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ctdsv2">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wecrl7">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nydtto">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ze02jw">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08csuwa">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0we2vgo">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j9c8hn">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_02gr2tz">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1g2m012">
+        <inputEntry id="UnaryTests_0ben0eu">
+          <text>"SHA-10-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gz2fyq">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ud2fw0">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mo82a7">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g0gm9c">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08cyild">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18m636j">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0veasd3">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wvem6g">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17bwp9g">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11fds49">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0b0t0ht">
+        <inputEntry id="UnaryTests_1skn92q">
+          <text>"SHA-10-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m5ty9t">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qdczl2">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vdd9fi">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11zt98o">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_179e7t1">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0izbmnq">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l1ke3p">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hkkqty">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mksbyj">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ab8mlw">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hauur2">
+        <inputEntry id="UnaryTests_00x8fzv">
+          <text>"SHA-10-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f97taj">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d7u65n">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uf6w87">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05v9d1x">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c3tj7i">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qahfin">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07rdgbt">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oyiutu">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18mw4yd">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03azvpy">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kg1sj2">
+        <inputEntry id="UnaryTests_1i26cxd">
+          <text>"SHA-10-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01g5kf9">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p1ptxk">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1s6xhs4">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19mupo0">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k0ljia">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cdtddz">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ebcflv">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pr8bfb">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hdgeqk">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14jip50">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13cxiyl">
+        <inputEntry id="UnaryTests_1maa2j8">
+          <text>"SHA-10-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11aouts">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0svtdbf">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1adug1s">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h7q7c2">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11l9fbj">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qcg6pl">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k43hau">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hbvzpk">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1k4v090">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0m5qr9v">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16u8dz8">
+        <inputEntry id="UnaryTests_1l9umvh">
+          <text>"SHA-10-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0erdbfl">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p2cral">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m2he81">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0syqi83">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12ikd7r">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c7fppl">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07qm0r4">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e6kn2z">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oipp8m">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0eijvvc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pagvve">
+        <inputEntry id="UnaryTests_1imbevk">
+          <text>"SHA-10-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_142cdpc">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d4ttpe">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h899w0">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08x7ipk">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j0ivpl">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pbti9v">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11tof08">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00sff63">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03t592m">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03n1ksx">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_010pcrb">
+        <inputEntry id="UnaryTests_1ilb5m4">
+          <text>"SHA-10-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17v2uc3">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l9jxs9">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vf8rst">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_107nvxx">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0damlt0">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_039mp1m">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ctftus">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0spushw">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_013h6qd">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04pvy46">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nlfx8f">
+        <inputEntry id="UnaryTests_1g8xzit">
+          <text>"SHA-10-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00lwu5h">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g7ovc2">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c2v61v">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hyp214">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xhtqeo">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14zr1sh">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10he7ee">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05s75dl">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0njr944">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cy4rq8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_183ew0g">
+        <inputEntry id="UnaryTests_120v6fg">
+          <text>"SHA-10-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_036pljg">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wcizj9">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w04v2n">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1afnozk">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ayf1z6">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y8zk12">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_079h17h">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ryt3d2">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01wpnin">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uoxp6r">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17j444e">
+        <inputEntry id="UnaryTests_1mv0kgb">
+          <text>"SHA-10-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n10gdm">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bu87x4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ju6ftm">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z3bhxj">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eugd0p">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_199ulkt">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b7effc">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1py8bzy">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0njxbth">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0osgwcp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m1amhk">
+        <inputEntry id="UnaryTests_1sycun3">
+          <text>"SHA-10-005"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lxcg4n">
+          <text>"inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rvqsay">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lqp5wr">
+          <text>"Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gzy4gb">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01aocee">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_041hcjx">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x3eyqg">
+          <text>&lt;= 67200</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wyc01x">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ok51ep">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fir5fr">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07fppdy">
+        <inputEntry id="UnaryTests_14iljg2">
+          <text>"SHA-13-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ss7065">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o8y2ex">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mwc9de">
+          <text>"Level 3"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0onfnd3">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0efs4xn">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1omp23j">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18aoyp2">
+          <text>&lt;= 2240</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11g7v1j">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0daa78g">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ol1ykg">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_066ibm6">
+        <inputEntry id="UnaryTests_0vyxase">
+          <text>"SHA-13-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jovmnr">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kffokl">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n276dy">
+          <text>"Level 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08ml814">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c59tfo">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dmlw7a">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p8o04u">
+          <text>&lt;= 3360</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zlxpgr">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u77pj7">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_113k8nv">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12tpa62">
+        <inputEntry id="UnaryTests_198evu8">
+          <text>"SHA-13-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15fylw1">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ec7wm0">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_190yziz">
+          <text>"Level 5"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nce5zd">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12gq485">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cei8rb">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y15ojo">
+          <text>&lt;= 3920</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kdwrb8">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w3hz9y">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r87jel">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0q34smx">
+        <inputEntry id="UnaryTests_1bu6apc">
+          <text>"SHA-13-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n9odqy">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14gexku">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y7jlpu">
+          <text>"Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pbraf2">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ug19km">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ezxxpz">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05l4ba6">
+          <text>&lt;= 4480</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dszlpu">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dl22zc">
+          <text>"household"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0n6mjxu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1p1pg8j">
+        <inputEntry id="UnaryTests_1e7w9y2">
+          <text>"SHA04-001"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jkyovb">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_034ofgz">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gfw5t8">
+          <text>"Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w46bjq">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xe2v58">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_078snaq">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07z7r19">
+          <text>&lt;= 500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v6a2lx">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uhkgo0">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1df3i58">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1a3zvwq">
+        <inputEntry id="UnaryTests_1jcohxk">
+          <text>"SHA04-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rk13ld">
+          <text>"outpatient","inpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uhew5i">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a1s543">
+          <text>"Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ac64s5">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bb0mmz">
+          <text>&lt;= 999</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00ykocd">
+          <text>&lt;= 1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a68rk5">
+          <text>&lt;= 3000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mn2f2c">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0br3b4r">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kzd4qk">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kaubwm">
+        <inputEntry id="UnaryTests_17wb7mm">
+          <text>"SHA-17-002"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x312bs">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16pye6i">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ucamj6">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nolx1d">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1brqd9g">
+          <text>[40..69]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12tbprk">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ye0szy">
+          <text>&lt;= 1500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sdu1k4">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lcoj47">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0eq8jj3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tbv2vo">
+        <inputEntry id="UnaryTests_1kd1kyk">
+          <text>"SHA-17-003"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y5tlbj">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cdpm3x">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dgvz0a">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zj3ha7">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bt8vju">
+          <text>&lt;= 45</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j9n21t">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1smaa4l">
+          <text>&lt;= 400</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rc8ttw">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y00c9w">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1df6te1">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cwi8dg">
+        <inputEntry id="UnaryTests_0ctf8b2">
+          <text>"SHA-17-004"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_135psmn">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p8es8r">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dp6omz">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0673u3y">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sgf4gs">
+          <text>[25..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lwrwof">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13ecyey">
+          <text>&lt;= 3000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1frqp7r">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e3qfk4">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fgslgk">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18wmf7j">
+        <inputEntry id="UnaryTests_1xaowrf">
+          <text>"SHA-17-005"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gx18bm">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0afgsb4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hxk8xm">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0avo7dd">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wq9cts">
+          <text>[25..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tbj2n2">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08pww8j">
+          <text>&lt;= 3000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1obvgwg">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lu0cat">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vmskno">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nhbojq">
+        <inputEntry id="UnaryTests_1irju2d">
+          <text>"SHA-17-006"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oejpjk">
+          <text>"outpatient"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12a2ar8">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h9n38u">
+          <text>"Level 2","Level 3","Level 4","Level 5","Level 6"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d3n5bg">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rjjqh0">
+          <text>[25..65]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bpmzzm">
+          <text>&lt;= 2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ue1viw">
+          <text>&lt;= 2800</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e6eanx">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oyomvz">
+          <text>"individual"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1qjgk6b">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0mlxm59">
+      <dmndi:DMNShape id="DMNShape_0avemug" dmnElementRef="decision1">
+        <dc:Bounds height="80" width="180" x="150" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

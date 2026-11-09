@@ -1,0 +1,1 @@
+ALTER TABLE work_flow ADD COLUMN IF NOT EXISTS gateway_ip VARCHAR(200);

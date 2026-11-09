@@ -1,0 +1,21 @@
+replicaCount: 3
+
+image:
+  repository: cloud-taifacare.dha.go.ke/taifa/claimprocessingengine
+  tag: dev-2026-07-02-12-21
+  pullPolicy: Always
+
+env:
+  SPRING_PROFILES_ACTIVE: uhc-phc-dev
+  JAVA_OPTS: "-Dlogging.level.io.camunda.zeebe.client.impl.ZeebeCallCredentials=ERROR -Dspring.cloud.kubernetes.leader.config-map-name=my-config-map -Dredis.host=10.10.100.135 -Dredis.port=6379 -Dcamunda.client.zeebe.base-url=http://10.104.227.85:26500/rest/ -Dcamunda.client.zeebe.gateway-url=http://10.104.227.85:26500 -Dpayment.batch.scheduler.enabled=false -Delastic.apm.service_name=EclaimsUAT -Delastic.apm.environment=UAT -Delastic.apm.server_url=https://prod-apm-server.apeiro-digital.com -Delastic.apm.secret_token=AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS1raWJhbmE6UGdYTFJ5c2tSSjZSYk4zeTR5LTZXdw -Delastic.apm.application_packages=io.coredge.health.claims"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  enabled: false
+  name: ""
+  volumeName: ""
+  mountPath: ""

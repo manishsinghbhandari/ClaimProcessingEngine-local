@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: Postgres@12345
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
+#  claims-app:
+#    build: .
+#    image: claim-processing-engine:1.0  # Specify the image name
+#    volumes:
+#      - ./src/main/resources/application-dev.yaml:/app/application-dev.yaml  # Mount the YAML file from your host
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=beta
+#      - JAVA_OPTS_APPEND=-agentlib:jdwp=transport=dt_socket,server=y,address=0.0.0.0:8681,suspend=n
+#      - HIE_USER_NAME=demo
+#      - HIE_PASS=demo
+#    ports:
+#      - "8080:8080"   # Expose the application port
+#      - "8681:8681"   # Expose the debug port for dev Only
+volumes:
+  pgdata:

@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+env:
+  SPRING_PROFILES_ACTIVE: ""
+  JAVA_OPTS: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  enabled: false
+  name: ""
+  volumeName: ""
+  mountPath: ""
+

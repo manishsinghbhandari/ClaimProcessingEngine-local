@@ -1,0 +1,21 @@
+replicaCount: 3
+
+image:
+  repository: cloud-taifacare.dha.go.ke/taifa/claimprocessingengine
+  tag: uat-2026-01-20-14-48
+  pullPolicy: Always
+
+env:
+  SPRING_PROFILES_ACTIVE: uhc-uat
+  JAVA_OPTS: "-javaagent:/app/apm-agent.jar -Delastic.apm.service_name=EclaimsUAT -Delastic.apm.environment=UAT -Delastic.apm.server_url=https://prod-apm-server.apeiro-digital.com -Delastic.apm.secret_token=AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS1raWJhbmE6UGdYTFJ5c2tSSjZSYk4zeTR5LTZXdw -Delastic.apm.application_packages=io.coredge.health.claims -Dredis.host=10.104.2.72 -Dredis.port=6379 -Dcamunda.client.zeebe.gateway-url=http://10.10.100.110:26500 -Dai.notes.base-url=http://74.235.194.111:4050 -D"
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  enabled: false
+  name: ""
+  volumeName: ""
+  mountPath: ""
+

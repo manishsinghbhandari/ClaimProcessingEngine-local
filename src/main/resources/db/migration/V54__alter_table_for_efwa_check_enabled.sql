@@ -1,0 +1,5 @@
+ALTER TABLE provider
+ADD COLUMN IF NOT EXISTS efwa_check_enabled BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE benefits_master
+ADD COLUMN IF NOT EXISTS efwa_check_enabled BOOLEAN DEFAULT FALSE;

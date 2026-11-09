@@ -1,0 +1,23 @@
+# Stage 1: Build the Maven project
+FROM openjdk:21-slim AS build
+WORKDIR /usr/src/app
+
+# Copy the Maven project files to the container
+COPY . .
+
+# Build the project using Maven
+RUN apt-get update && apt-get install -y maven && mvn clean package
+
+# Stage 2: Create a new image and copy the JAR from the build stage
+FROM openjdk:21-slim
+# Set environment variables for JAVA_OPTS (JVM options)
+ENV JAVA_OPTS="-Dlogging.level.io.camunda.zeebe.client.impl.ZeebeCallCredentials=ERROR"
+WORKDIR /app
+
+# Copy the built JAR from the previous stage
+COPY --from=build /usr/src/app/target/claims-1.0.0.jar eclaims.jar
+#Expose port
+EXPOSE 8080 8681
+# Run the JAR file
+CMD ["java", "-jar", "eclaims.jar"]
+

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:feel="http://www.omg.org/spec/FEEL/20140401" id="definitions" name="ClaimValidationDecision" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.27.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <decision id="claiimAutoApproval" name="Claim Processing Decision">
+    <decisionTable id="decisionTable1">
+      <input id="categoryInput" label="Category" camunda:inputVariable="category">
+        <inputExpression id="categoryExpression" typeRef="string">
+          <text>category</text>
+        </inputExpression>
+      </input>
+      <input id="serviceCategoryInput" label="Service Category" camunda:inputVariable="serviceCatagory">
+        <inputExpression id="serviceCategoryExpression" typeRef="string">
+          <text>serviceCategory</text>
+        </inputExpression>
+      </input>
+      <input id="interventionInput" label="Intervention Name">
+        <inputExpression id="interventionExpression" typeRef="string">
+          <text>interventionName</text>
+        </inputExpression>
+      </input>
+      <input id="subCategoryInput" label="Sub-Category">
+        <inputExpression id="subCategoryExpression" typeRef="string">
+          <text>subCategory</text>
+        </inputExpression>
+      </input>
+      <input id="needsPreAuthInput" label="Needs Pre-Auth">
+        <inputExpression id="needsPreAuthExpression" typeRef="boolean">
+          <text>preAuthDone</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1390cu5" label="Facility Catagry">
+        <inputExpression id="LiteralExpression_1kdc862" typeRef="string">
+          <text>facilityCatagory</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1cincq1">
+          <text>"Level 1","Level 2","Level 3","Level 4","Level 5","Level 6","Level 7","Level 8","Level 9","Level 10","Level 11"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0aefyf2" label="Gender">
+        <inputExpression id="LiteralExpression_0vqh7oz" typeRef="string">
+          <text>gender</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0xwhlqm" label="Age">
+        <inputExpression id="LiteralExpression_1jp2ehq" typeRef="integer">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1do2npn" label="Intervention Count">
+        <inputExpression id="LiteralExpression_03l8anu" typeRef="integer">
+          <text>timesInterventionUsed</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0tpmtph" label="Individual limit" biodi:width="192">
+        <inputExpression id="LiteralExpression_1xi6jg8" typeRef="long">
+          <text>claimAmount</text>
+        </inputExpression>
+      </input>
+      <output id="decisionOutput" name="isAutoApproved" typeRef="boolean" />
+      <rule id="rule1">
+        <inputEntry id="categoryEntry1">
+          <text>"Ambulance and Emergency Services"</text>
+        </inputEntry>
+        <inputEntry id="serviceCategoryEntry1">
+          <text>"Outpatient"</text>
+        </inputEntry>
+        <inputEntry id="interventionEntry1">
+          <text>"Ambulance services (Intra-metro within 25KM radius )"</text>
+        </inputEntry>
+        <inputEntry id="subCategoryEntry1">
+          <text>"Evacuations"</text>
+        </inputEntry>
+        <inputEntry id="needsPreAuthEntry1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ew06bm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o9c5o2">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d7hn67">
+          <text>&lt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ckbgsh">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1134tdb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="decisionOutputEntry1">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule2">
+        <inputEntry id="categoryEntry2">
+          <text>"Ambulance and Emergency Services"</text>
+        </inputEntry>
+        <inputEntry id="serviceCategoryEntry2">
+          <text>"Outpatient/Inpatient"</text>
+        </inputEntry>
+        <inputEntry id="interventionEntry2">
+          <text>"Ambulance services (Extra-metro,beyond 25KM )"</text>
+        </inputEntry>
+        <inputEntry id="subCategoryEntry2">
+          <text>"Evacuations"</text>
+        </inputEntry>
+        <inputEntry id="needsPreAuthEntry2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00r9n86">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_028svrd">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dzfeb8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09jq1la">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lla5gp">
+          <text>&lt;= 5000</text>
+        </inputEntry>
+        <outputEntry id="decisionOutputEntry2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule3">
+        <inputEntry id="categoryEntry3">
+          <text>"Ambulance and Emergency Services"</text>
+        </inputEntry>
+        <inputEntry id="serviceCategoryEntry3">
+          <text>"Outpatient/Inpatient"</text>
+        </inputEntry>
+        <inputEntry id="interventionEntry3">
+          <text>"Cardiac/Respiratory Arrest"</text>
+        </inputEntry>
+        <inputEntry id="subCategoryEntry3">
+          <text>"Emergency"</text>
+        </inputEntry>
+        <inputEntry id="needsPreAuthEntry3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07t76d7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e3jtx7">
+          <text>"male","female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_093nzl1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yfknqq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vx1k33">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="decisionOutputEntry3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule4">
+        <inputEntry id="categoryEntry4">
+          <text>"Ambulance and Emergency Services"</text>
+        </inputEntry>
+        <inputEntry id="serviceCategoryEntry4">
+          <text>"Inpatient"</text>
+        </inputEntry>
+        <inputEntry id="interventionEntry4">
+          <text>"Major trauma"</text>
+        </inputEntry>
+        <inputEntry id="subCategoryEntry4">
+          <text>"Emergency"</text>
+        </inputEntry>
+        <inputEntry id="needsPreAuthEntry4">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fk4hgx">
+          <text>"Level 1","Level 2","Level 3","Level 4","Level 5","Level 6","Level 7","Level 8","Level 9","Level 10","Level 11"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fn5gxg">
+          <text>"female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ex65cf">
+          <text>&gt;= 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11n8j4g">
+          <text>&lt;= 10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dizen5">
+          <text>&lt;= 50000</text>
+        </inputEntry>
+        <outputEntry id="decisionOutputEntry4">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule5">
+        <inputEntry id="categoryEntry5">
+          <text>"Ambulance and Emergency Services"</text>
+        </inputEntry>
+        <inputEntry id="serviceCategoryEntry5">
+          <text>"Outpatient/Inpatient"</text>
+        </inputEntry>
+        <inputEntry id="interventionEntry5">
+          <text>"Shock states"</text>
+        </inputEntry>
+        <inputEntry id="subCategoryEntry5">
+          <text>"Emergency"</text>
+        </inputEntry>
+        <inputEntry id="needsPreAuthEntry5">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xon70p">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10lyuhl">
+          <text>"male"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bvibhb">
+          <text>[0..10]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_089s2g1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_061h0tl">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="decisionOutputEntry5">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_09yl049">
+      <dmndi:DMNShape id="DMNShape_1ht4ji4" dmnElementRef="claiimAutoApproval">
+        <dc:Bounds height="80" width="180" x="330" y="170" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

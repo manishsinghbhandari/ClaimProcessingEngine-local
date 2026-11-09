@@ -1,0 +1,1 @@
+ALTER TABLE public.patient_utilization ADD COLUMN IF NOT EXISTS utilized_per_diem int4 NULL;
